@@ -1,15 +1,58 @@
 import numpy as np
 import copy
 
-positions = {1:[],2:[],3:[],4:[],5:[],6:[],7:[],8:[],9:[]}
-roster = []
-names_of_positions = {1:'rover',2:'catcher',3:'1st base',4:'2nd base',5:'3rd base',6:'shortstop',7:'leftfield',8:'centerfield',9:'rightfield'}
+class Team:
 
-def new_player():
-    print '\nADDING SOFTBALL PLAYER\n'
-    person = raw_input('    Player Name: ')
-    roster.append(person)
+    names_of_positions = {1:'rover',2:'catcher',3:'1st base',4:'2nd base',5:'3rd base',6:'shortstop',7:'leftfield',8:'centerfield',9:'rightfield'}
     
+    def __init__(self):
+        self.numPlayers = 0
+        self.describe = 'This is a softball team.'
+        self.positions = {1:[],2:[],3:[],4:[],5:[],6:[],7:[],8:[],9:[]}
+        self.roster = []
+
+    def regulars(self):
+        reg = {'Jes':[7,1],'Lee':[6],'Jason':[8,6],'Amanda':[2,3,4,5]}
+        self.numPlayers += len(reg)
+        for regPlayer in reg:
+            self.roster.append(regPlayer)
+            for p in reg[regPlayer]:
+                self.positions[p].append(regPlayer)
+        
+    def add(self):
+        self.numPlayers += 1
+        
+        print '\nADDING NEW SOFTBALL PLAYER'
+        player = get_name()
+        self.roster.append(player)
+        
+        pos = get_positions()
+        
+        if type(pos) == int:
+            self.positions[pos].append(player)
+        else:    
+            for p in list(pos):
+                self.positions[p].append(player)
+
+    def remove(self):
+        self.numPlayers -= 1
+        
+        print '\nREMOVING SOFTBALL PLAYER'
+        player = get_name()
+        self.roster.remove(player)
+
+        for i in np.arange(1,10):
+            if player in self.positions[i]:
+                self.positions[i].remove(player)
+        
+    def inning(self):
+        new_inning(self.roster,self.positions,self.names_of_positions)
+
+                
+def get_name():
+    return raw_input('    Player Name: ')
+
+def get_positions():
     print '\nCHOOSE A FEW POSITIONS'
     print '   1. rover'
     print '   2. catcher'
@@ -21,19 +64,13 @@ def new_player():
     print '   8. centerfield'
     print '   9. rightfield'
     print '   10. Anywhere...'
-    pos = eval(raw_input('\n    Positions: '))
-    
-    if pos == 10:
-        pos = np.arange(1,10)
+    p = eval(raw_input('\n    Positions: '))
+    if p == 10:
+        p = np.arange(1,10)
+    return p
+  
 
-    if type(pos) == int:
-        positions[pos].append(person)
-    else:    
-        for p in list(pos):
-            positions[p].append(person)
-            
-            
-def inning():
+def new_inning(roster,positions,names):
     sitting = np.random.choice(roster,replace=False,size=len(roster)-9)
     unassigned = roster[:]
     fielders = copy.deepcopy(positions)
@@ -72,14 +109,9 @@ def inning():
             
     print '\nTAKE THE FIELD!\n'#,takefield
     for p in np.arange(1,10):
-        print takefield[p],':\t', names_of_positions[p]
+        print takefield[p],':\t', names[p]
 
     print '\nUNASSIGNED: '
     for un in unassigned: print un
 
-
-#-------------------------------------------
-#for testing inning function
-#roster = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n']
-#positions = {1: ['a', 'b', 'c', 'j', 'k', 'l'], 2: ['a', 'b', 'c', 'd', 'k', 'l'], 3: ['a', 'b', 'c', 'd', 'e', 'l'], 4: ['a', 'b', 'd', 'e', 'f', 'l'], 5: ['a', 'b', 'e', 'f', 'g', 'l', 'm', 'n'], 6: ['a', 'b', 'f', 'g', 'h', 'l', 'm', 'n'], 7: ['a', 'b', 'g', 'h', 'i', 'l'], 8: ['a', 'b', 'h', 'i', 'j', 'l'], 9: ['a', 'b', 'i', 'j', 'k', 'l']}
-    
+   
