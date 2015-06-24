@@ -23,6 +23,7 @@ demons = Team()
 *To get set up for the game, import regulars and add players as required*
 
 demons.regulars()
+
 demons.add()  #repeat as necessary
 
 *If someone leaves early, or a regular doesn't show, remove them*
