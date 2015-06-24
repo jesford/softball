@@ -1,27 +1,36 @@
 ## Softball Coaching
 
-This python script allows me to randomly select players to sit each inning, and assigns the fielders to positions based on their fielding preferences.
+This python code allows me to randomly select players to sit each
+inning, and assigns the fielders to positions based on their fielding
+preferences.
 
-There are two functions in **coach.py**:
-
-- **new_player()** adds a player to the roster. Each time it is run, it will ask for player name, and preferred fielding positions (which can be one, several, or all positions).
-
-- **inning()** generates a new list of players on the bench and players assigned to each position. It attempts to put players in one of their preferred positions, but when this is not possible (maybe all the input left fielders were chosen to sit) it will suggest a volunteer.
+**coach.py** has been revamped to include a Team() class. Your team is
+now an object that you can add/remove players from, and assign
+positions for. Example usage is given below...
 
 #### How to coach a softball game without doing too much thinking.
 
 #### OR Less thinking, more hitting.
 
-*For now, just open an ipython session, and do:*
+*For now, open an ipython session, and do:*
 
-from coach import new_player, inning
+from coach import *
 
-*To get set up for the game, repeatedly run*
+*Create a Team object*
 
-new_player()
+demons = Team()
 
-*to add players to the roster. Each time a new inning starts, run*
+*To get set up for the game, import regulars and add players as required*
 
-inning()
+demons.regulars()
+demons.add()  #repeat as necessary
+
+*If someone leaves early, or a regular doesn't show, remove them*
+
+demons.remove()
+
+*Each time a new inning starts, run*
+
+demons.inning()
 
 *which will print out a random selection of sitting and fielding players for each position. If no one could be matched to a position, the program will suggest a volunteer.*
