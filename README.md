@@ -9,11 +9,10 @@ preferences.
 now an object that you can add/remove players from, and assign
 positions for. Example usage is given below...
 
-#### How to coach a softball game without doing too much thinking.
+How to coach a softball game without doing too much thinking.
+-------
 
-#### OR Less thinking, more hitting.
-
-*For now, open an ipython session, and do:*
+For now, open an ipython session, and do:
 
 ```python
 
@@ -39,4 +38,4 @@ demons.inning()
 
 ```
 
-*This last line will print out a random selection of sitting and fielding players for each position. If no one could be matched to a position, the program will suggest a volunteer.*
+This last line will print out a random selection of sitting and fielding players for each position. If no one could be matched to a position, the program will suggest a volunteer.
