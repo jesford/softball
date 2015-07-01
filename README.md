@@ -15,7 +15,7 @@ positions for. Example usage is given below...
 
 *For now, open an ipython session, and do:*
 
-'''python
+```python
 
 from coach import *
 
@@ -37,6 +37,6 @@ demons.remove()
 
 demons.inning()
 
-'''
+```
 
 *This last line will print out a random selection of sitting and fielding players for each position. If no one could be matched to a position, the program will suggest a volunteer.*
